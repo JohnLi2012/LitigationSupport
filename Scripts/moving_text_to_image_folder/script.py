@@ -1,4 +1,6 @@
 ##Move text files into corresponding image folders
+## 1) Add GUI 2) for loop inside another for loop might have performance issue with either two directories having large amount of files
+## possibly better approach is to sort and once a text file is moved, chop corresponding image from target_path 
 
 source_path = r"path\to\TEXT"
 target_path = r"path\to\IMAGES"
