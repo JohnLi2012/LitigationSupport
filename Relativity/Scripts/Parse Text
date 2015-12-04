@@ -1,0 +1,35 @@
+<script>
+	<name>Parse Text</name>
+	<description>This script parse string from a starting position by specified length. For example: "ABC0001 - ABC0004", if user specify to parse from position 3 by length 3, the result will be "C00"</description>
+	<category>Case Functionality</category>
+	<input orientation="horizontal">
+		<field id="dest_field" name="Destination Field">
+			<filters />
+		</field>
+		<field id="source_field" name="Source Field">
+			<filters />
+		</field>
+		<constant id="start_pos" name="Starting position" type="number" />
+		<constant id="length" name="Length" type="number" />
+		<search id="search" name="Saved Search" />
+	</input>
+	<version>1.0</version>
+	<display type="itemlist" />
+	<action returns="status"><![CDATA[
+
+
+UPDATE [Document]
+SET
+[#dest_field#] = SUBSTRING(temp.[#source_field#],'#start_pos#','#length#')
+FROM
+(SELECT [DOCUMENT]. * #search#) temp
+WHERE
+temp.ARTIFACTID = [Document].ARTIFACTID
+
+
+
+
+
+
+]]></action>
+</script>
