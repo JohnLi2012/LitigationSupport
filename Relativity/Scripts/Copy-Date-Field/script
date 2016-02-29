@@ -1,0 +1,33 @@
+<script>
+	<name>Copy Date Field to Another Date Field</name>
+	<description>This script copy date field to another date field</description>
+	<category>Case Functionality</category>
+	<input orientation="horizontal">
+		<field id="dest_field" name="Destination Field">
+			<filters>
+				<type>2</type>
+			</filters>
+		</field>
+		<field id="source_field" name="Source Field">
+			<filters>
+				<type>2</type>
+			</filters>
+		</field>
+		<search id="search" name="Saved Search" />
+	</input>
+	<version>1.0</version>
+	<display type="itemlist" />
+	<action returns="status"><![CDATA[
+
+
+UPDATE [Document]
+SET
+[#dest_field#] = temp.[#source_field#]
+FROM
+(SELECT [DOCUMENT]. * #search#) temp
+WHERE
+temp.ARTIFACTID = [Document].ARTIFACTID
+
+
+]]></action>
+</script>
