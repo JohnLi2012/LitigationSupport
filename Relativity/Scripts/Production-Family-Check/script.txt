@@ -1,0 +1,25 @@
+<script>
+	<name>Production Family Integrity Check</name>
+	<description></description>
+	<category>Production Functionality</category>
+	<input orientation="horizontal">
+		<search id="search" name="Saved Search" />
+	</input>
+	<display type="itemlist" />
+	<action returns="table"><![CDATA[
+
+/*  
+this script assumes the familyid field name is docfamilyid, and doc identifier field name is docid; 
+so update the field name before using it in your Relativity workspace
+*/  
+
+select c.* from (select distinct A.docfamilyid from document A join (SELECT [DOCUMENT]. * #search#) temp on A.artifactid = temp.artifactid) c WHERE  NOT EXISTS 
+(
+SELECT 1 FROM (SELECT [DOCUMENT]. * #search#) as b
+   WHERE b.docid = c.docfamilyid
+)
+
+	
+
+	]]></action>
+</script>
